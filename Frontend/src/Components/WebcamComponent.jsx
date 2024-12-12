@@ -23,10 +23,14 @@ const WebcamCapture = () => {
       const imgtotext = async () => {
         const {
           data: { text },
-        } = await Tesseract.recognize(imageSrc, "eng");
+        } = await Tesseract.recognize(imageSrc, "eng", {
+          tessedit_pageseg_mode: Tesseract.PSM.SINGLE_BLOCK,
+          oem: Tesseract.OEM.LSTM_ONLY,
+        });
         console.log(text);
         settext(text);
       };
+
       imgtotext();
     }
   };
